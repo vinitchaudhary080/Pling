@@ -1,0 +1,9 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="timer">
+<g id="Icon">
+<path id="Line Horizontal" d="M5.33333 1.33333H10.6667" stroke="#606873" stroke-width="1.5" stroke-linecap="round"/>
+<path id="Line Vertical" d="M8 9V6.33333" stroke="#606873" stroke-width="1.5" stroke-linecap="round"/>
+<path id="Ellipse" d="M8 3.75C10.8995 3.75 13.25 6.1005 13.25 9C13.25 11.8995 10.8995 14.25 8 14.25C5.1005 14.25 2.75 11.8995 2.75 9C2.75 6.1005 5.1005 3.75 8 3.75Z" stroke="#606873" stroke-width="1.5"/>
+</g>
+</g>
+</svg>

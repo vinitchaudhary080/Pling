@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --frame-pad: 24px;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-surface font-sans text-grey-800 antialiased;
+    margin: 0;
+    font-feature-settings: 'dlig' 1;
+  }
+
+  /* Visible, on-brand focus ring for every interactive element. */
+  :where(a, button, input, textarea, [tabindex]):focus-visible {
+    @apply outline-none ring-2 ring-brand-500/70 ring-offset-2 ring-offset-surface;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /*
+   * Single source of truth for the page gutter.
+   *
+   * 24px is the Figma spec (375px frame, 327px content) and holds until `md`,
+   * which is exactly where the pages drop their 375px cap and become real web
+   * layouts — stepping up any earlier would squeeze the content column below
+   * 327px. From there it eases out to 32 then 40 so wide viewports do not sit
+   * tight against the window edge.
+   *
+   * Declared in `components` rather than `utilities` so a Tailwind padding
+   * utility (e.g. `md:px-0` on the scroll rails) can still override it.
+   */
+  .px-gutter {
+    padding-inline: 1.5rem;
+  }
+  .-mx-gutter {
+    margin-inline: -1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .px-gutter {
+      padding-inline: 2rem;
+    }
+    .-mx-gutter {
+      margin-inline: -2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .px-gutter {
+      padding-inline: 2.5rem;
+    }
+    .-mx-gutter {
+      margin-inline: -2.5rem;
+    }
+  }
+
+  /* Top inset for the first row of page chrome, clearing a notch if there is one. */
+  .pt-top {
+    padding-top: max(3.5rem, env(safe-area-inset-top));
+  }
+}
+
+@layer utilities {
+
+  /* Hides the horizontal scrollbar on the Step 8 / dashboard carousels
+     while keeping native momentum scrolling and keyboard access. */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
