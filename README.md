@@ -15,8 +15,10 @@ npm run build    # type-check + production bundle
 npm test         # unit tests
 ```
 
-Needs Node 20.19 or newer — Vite 8 builds with Rolldown, whose native binaries
-won't load below that. `.nvmrc` pins it to 22.
+Needs Node 20.19 or newer — Vite 8 builds with Rolldown, whose platform binaries
+are optional dependencies that npm silently skips on older releases. `.nvmrc`,
+`engines` and `.devcontainer/devcontainer.json` all pin it, since Vercel,
+npm and CodeSandbox each read a different one.
 
 For CodeSandbox, use Import from GitHub on the repo above. It's a standard Vite
 template, so nothing special is needed.

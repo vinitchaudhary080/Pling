@@ -156,8 +156,19 @@ npm run lint     # oxlint
 `npm run build` type-checks first, so a type error fails the build rather than
 shipping.
 
-Node 20.19 or newer is required: Vite 8 builds with Rolldown, whose native
-binaries won't load on older releases. `.nvmrc` pins it to 22 so CodeSandbox,
-Vercel and nvm all pick the same one. The dev server also binds to every
-interface (`server.host` in `vite.config.ts`), which is what lets a container
-host proxy the preview.
+**Node 20.19 or newer is required.** Vite 8 builds with Rolldown, whose
+platform binaries are optional dependencies declaring
+`^20.19.0 || >=22.12.0`. npm skips an optional dependency whose engines do not
+match — silently — so on an older Node the binary is never installed and the
+failure only surfaces later as "Cannot find native binding".
+
+Three files pin it, because three hosts read three different things:
+
+| File | Read by |
+| --- | --- |
+| `.devcontainer/devcontainer.json` | CodeSandbox, Codespaces — the Node version comes from the container image, so `.nvmrc` never gets a say |
+| `.nvmrc` | Vercel, nvm |
+| `engines` in `package.json` | npm, which warns up front rather than failing inside a native module |
+
+The dev server also binds to every interface (`server.host` in
+`vite.config.ts`), which is what lets a container host proxy the preview.
