@@ -155,3 +155,9 @@ npm run lint     # oxlint
 
 `npm run build` type-checks first, so a type error fails the build rather than
 shipping.
+
+Node 20.19 or newer is required: Vite 8 builds with Rolldown, whose native
+binaries won't load on older releases. `.nvmrc` pins it to 22 so CodeSandbox,
+Vercel and nvm all pick the same one. The dev server also binds to every
+interface (`server.host` in `vite.config.ts`), which is what lets a container
+host proxy the preview.

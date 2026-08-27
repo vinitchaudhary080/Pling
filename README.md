@@ -15,6 +15,9 @@ npm run build    # type-check + production bundle
 npm test         # unit tests
 ```
 
+Needs Node 20.19 or newer — Vite 8 builds with Rolldown, whose native binaries
+won't load below that. `.nvmrc` pins it to 22.
+
 For CodeSandbox, use Import from GitHub on the repo above. It's a standard Vite
 template, so nothing special is needed.
 
