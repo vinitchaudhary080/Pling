@@ -150,19 +150,29 @@ export const OnboardingPage = () => {
           </div>
         </header>
 
-        {/* Answer column */}
-        <main className="flex min-w-0 flex-1 flex-col gap-6 px-gutter pb-6 pt-6 md:px-0 md:pt-0">
-          <div key={step.id} className="animate-fade-up">
-            <StepBody
-              step={step}
-              selected={flow.selected}
-              healthNote={flow.healthNote}
-              onToggle={flow.toggle}
-              onNoteChange={flow.setHealthNote}
-            />
-          </div>
+        {/*
+          Answer column.
 
-          <SelectionSummary labels={labelsFor(step, flow.selected)} mode={step.mode} />
+          On desktop the answers are taken out of flow (absolute inside a
+          stretched column) so they no longer drive the panel's height. The
+          step rail does instead, which keeps the panel the same size on every
+          question — a four-card step and a two-chip step now match — and the
+          answers scroll inside it when they overflow.
+        */}
+        <main className="flex min-w-0 flex-1 flex-col px-gutter pb-6 pt-6 md:px-0 md:pt-0 lg:relative lg:pb-0">
+          <div className="no-scrollbar flex flex-col gap-6 lg:absolute lg:inset-0 lg:overflow-y-auto lg:pr-1">
+            <div key={step.id} className="animate-fade-up">
+              <StepBody
+                step={step}
+                selected={flow.selected}
+                healthNote={flow.healthNote}
+                onToggle={flow.toggle}
+                onNoteChange={flow.setHealthNote}
+              />
+            </div>
+
+            <SelectionSummary labels={labelsFor(step, flow.selected)} mode={step.mode} />
+          </div>
         </main>
       </div>
 
